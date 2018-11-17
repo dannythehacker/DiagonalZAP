@@ -57,12 +57,6 @@ namespace Diagonal.ZAP
                 }
             }
 
-            if (ZAP.Instance.Configuration.Instance.SMSEffect)
-            {
-                sender.TriggerEffect(ZAP.Instance.Configuration.Instance.SendEffectID);
-                receiver.TriggerEffect(ZAP.Instance.Configuration.Instance.ReceiveEffectID);
-            }
-
             int cost = ZAP.Instance.Configuration.Instance.SMSCost;
 
             if (sender.Experience < cost)
@@ -71,7 +65,14 @@ namespace Diagonal.ZAP
                 return;
             }
 
+            if (ZAP.Instance.Configuration.Instance.SMSEffect)
+            {
+                sender.TriggerEffect(ZAP.Instance.Configuration.Instance.SendEffectID);
+                receiver.TriggerEffect(ZAP.Instance.Configuration.Instance.ReceiveEffectID);
+            }
+
             sender.Experience -= (uint)cost;
+            UnturnedChat.Say(sender, ZAP.Instance.Translate("sms_pay", cost), Color.blue);
             UnturnedChat.Say(sender, ZAP.Instance.Translate("send_sms", receiver.DisplayName), ZAP.Instance.Configuration.Instance.ChatColor);
             UnturnedChat.Say(receiver, ZAP.Instance.Translate("receive_sms", sender.DisplayName, msg), ZAP.Instance.Configuration.Instance.ChatColor);
             return;

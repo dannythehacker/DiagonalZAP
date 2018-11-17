@@ -64,7 +64,7 @@ namespace Diagonal.ZAP
                 { "no_player_reply","You do not even have an sms to reply!" },
                 { "no_yourself","You can not send an sms to yourself!" },
                 { "not_enough_xp","You do not have EXP enough to send an SMS!" },
-                { "sms_pay","You paid 50 levels of experience for this SMS!" }
+                { "sms_pay","You paid {0} levels of experience for this SMS!" }
             };
         #endregion
     }
