@@ -40,6 +40,12 @@ namespace Diagonal.ZAP
                 return;
             }
 
+            if (receiver.CSteamID == sender.CSteamID)
+            {
+                UnturnedChat.Say(sender, ZAP.Instance.Translate("no_yourself"), Color.red);
+                return;
+            }
+
             string msg = string.Empty;
             int n2 = 0;
             foreach (string msg3 in command)

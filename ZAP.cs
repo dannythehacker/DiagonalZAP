@@ -13,7 +13,6 @@ namespace Diagonal.ZAP
     public class ZAP : RocketPlugin<ZAPConfiguration>
     {
         public static ZAP Instance;
-        public Dictionary<ulong, MessageTargets> PlayerList;
 
         #region Write
         public static void Write(string message)
@@ -53,21 +52,7 @@ namespace Diagonal.ZAP
             Instance = null;
         }
         #endregion
-        
-        public void SetPlayerData(UnturnedPlayer plyr, UnturnedPlayer Target)
-        {
-            if (!this.PlayerList.ContainsKey(Target.CSteamID.m_SteamID))
-            {
-                this.PlayerList[Target.CSteamID.m_SteamID] = new MessageTargets();
-            }
-            if (!this.PlayerList.ContainsKey(plyr.CSteamID.m_SteamID))
-            {
-                this.PlayerList[plyr.CSteamID.m_SteamID] = new MessageTargets();
-            }
-            this.PlayerList[Target.CSteamID.m_SteamID].ReplyTo = plyr.CSteamID.m_SteamID;
-            this.PlayerList[plyr.CSteamID.m_SteamID].MessageTo = Target.CSteamID.m_SteamID;
-        }
-        
+
         #region Translate
         public override TranslationList DefaultTranslations =>
             new TranslationList
