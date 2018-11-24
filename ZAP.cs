@@ -7,12 +7,14 @@ using Rocket.Unturned.Player;
 using Rocket.API.Collections;
 using System;
 using System.Collections.Generic;
+using Steamworks;
 
 namespace Diagonal.ZAP
 {
     public class ZAP : RocketPlugin<ZAPConfiguration>
     {
         public static ZAP Instance;
+        public static Dictionary<CSteamID, CSteamID> sms = new Dictionary<CSteamID, CSteamID>();
 
         #region Write
         public static void Write(string message)

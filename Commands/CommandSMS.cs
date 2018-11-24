@@ -2,13 +2,14 @@
 using Rocket.Unturned.Chat;
 using Rocket.Unturned.Player;
 using SDG.Unturned;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Diagonal.ZAP
 {
-    public class CommandPvP : IRocketCommand
+    public class CommandSMS : IRocketCommand
     {
         public AllowedCaller AllowedCaller => AllowedCaller.Both;
 
@@ -40,7 +41,7 @@ namespace Diagonal.ZAP
                 return;
             }
 
-            if (receiver.CSteamID == sender.CSteamID)
+            if (receiver == sender)
             {
                 UnturnedChat.Say(sender, ZAP.Instance.Translate("no_yourself"), Color.red);
                 return;
@@ -70,6 +71,11 @@ namespace Diagonal.ZAP
                 sender.TriggerEffect(ZAP.Instance.Configuration.Instance.SendEffectID);
                 receiver.TriggerEffect(ZAP.Instance.Configuration.Instance.ReceiveEffectID);
             }
+
+            if (ZAP.sms.ContainsKey(receiver.CSteamID))
+                ZAP.sms[receiver.CSteamID] = sender.CSteamID;
+            else
+                ZAP.sms.Add(receiver.CSteamID, sender.CSteamID);
 
             sender.Experience -= (uint)cost;
             UnturnedChat.Say(sender, ZAP.Instance.Translate("sms_pay", cost), Color.blue);
