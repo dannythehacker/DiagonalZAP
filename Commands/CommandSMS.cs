@@ -41,7 +41,7 @@ namespace Diagonal.ZAP
                 return;
             }
 
-            if (receiver == sender)
+            if (receiver.CSteamID == sender.CSteamID)
             {
                 UnturnedChat.Say(sender, ZAP.Instance.Translate("no_yourself"), Color.red);
                 return;
@@ -58,9 +58,7 @@ namespace Diagonal.ZAP
                 }
             }
 
-            int cost = ZAP.Instance.Configuration.Instance.SMSCost;
-
-            if (sender.Experience < cost)
+            if (sender.Experience < ZAP.Instance.Configuration.Instance.SMSCost)
             {
                 UnturnedChat.Say(sender, ZAP.Instance.Translate("not_enough_xp"), Color.red);
                 return;
@@ -76,9 +74,9 @@ namespace Diagonal.ZAP
                 ZAP.sms[receiver.CSteamID] = sender.CSteamID;
             else
                 ZAP.sms.Add(receiver.CSteamID, sender.CSteamID);
-
-            sender.Experience -= (uint)cost;
-            UnturnedChat.Say(sender, ZAP.Instance.Translate("sms_pay", cost), Color.blue);
+            
+            sender.Experience -= (uint)ZAP.Instance.Configuration.Instance.SMSCost;
+            UnturnedChat.Say(sender, ZAP.Instance.Translate("sms_pay", ZAP.Instance.Configuration.Instance.SMSCost), Color.blue);
             UnturnedChat.Say(sender, ZAP.Instance.Translate("send_sms", receiver.DisplayName), ZAP.Instance.Configuration.Instance.ChatColor);
             UnturnedChat.Say(receiver, ZAP.Instance.Translate("receive_sms", sender.DisplayName, msg), ZAP.Instance.Configuration.Instance.ChatColor);
             return;

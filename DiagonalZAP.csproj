@@ -67,10 +67,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CommandReply.cs" />
     <Compile Include="Commands\CommandSMS.cs" />
-    <Compile Include="ZAP.cs" />
-    <Compile Include="ZAPConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ZAPConfiguration.cs" />
+    <Compile Include="ZAP.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
